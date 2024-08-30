@@ -97,6 +97,14 @@ export class Ec2Instance {
     ];
   }
 
+  getIamInstanceProfile() {
+    if (this.config.ec2InstanceTags) {
+      return { Name: this.config.ec2IamInstanceProfile }
+    }
+
+    return {}
+  }
+
   async getCrossAccountCredentials(): Promise<AwsCredentialIdentity> {
     // if we have a valid session token then we just pass the credentials through
     // possibly this is due to an OIDC/OAuth flow
@@ -283,7 +291,7 @@ export class Ec2Instance {
 
     var params: RunInstancesCommandInput = {
       ImageId: this.config.ec2AmiId,
-      IamInstanceProfile: this.config.ec2IamInstanceProfile ? this.config.ec2IamInstanceProfile : undefined,
+      IamInstanceProfile: this.getIamInstanceProfile(),
       InstanceInitiatedShutdownBehavior: "terminate",
       InstanceMarketOptions: {},
       InstanceType: this.config.ec2InstanceType as _InstanceType,
