@@ -46,7 +46,7 @@ export class Ec2Instance {
     };
 
     this.client = new EC2({
-      credentials: this.credentials,
+      //credentials: this.credentials,
       region: this.config.awsRegion,
     });
 
@@ -56,9 +56,9 @@ export class Ec2Instance {
   async getEc2Client() {
     if (!this.assumedRole && this.config.awsAssumeRole) {
       this.assumedRole = !this.assumedRole;
-      const credentials = await this.getCrossAccountCredentials();
+      //const credentials = await this.getCrossAccountCredentials();
       this.client = new EC2({
-        credentials: credentials,
+        //credentials: credentials,
         region: this.config.awsRegion,
       });
     }
