@@ -22,14 +22,10 @@ jobs:
 
       - name: Install packages
         run: |
-          npm ci
-          npm install -g eslint
-
-    #   - name: Run linter
-    #     run: npm run lint
+          npm install
 
       - name: Package
-        run: npm run package
+        run: npm run build
 
       - name: Commit
         run: |
